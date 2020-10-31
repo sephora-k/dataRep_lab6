@@ -1,12 +1,74 @@
 import React from 'react'; //import React from React Library
 
-export class Create extends React.Component{ //'export' keyword will allow access for this class to other .js files
+export class Create extends React.Component { //'export' keyword will allow access for this class to other .js files
 
-        render(){
-            return(
-                <div>
-                    <h1>This is my create component.</h1>
-                </div>
-            );
+    constructor() {
+        super(); // envokes constructor of parent class
+
+        this.onSubmit = this.onSubmit.bind(this); //all events must be binded
+        this.onChangeTitle = this.onChangeTitle.bind(this);
+        this.onChangeYear = this.onChangeYear.bind(this);
+        this.onChangePoster = this.onChangePoster.bind(this);
+
+        this.state = {
+            Title: '',
+            Year: '',
+            Poster: ''
         }
+    }
+
+    onChangeTitle(e) { //this method is called when value of input control changes
+        this.setState({
+            Title: e.target.value
+        });
+    }
+
+    onChangeYear(e) { //envoke method
+        this.setState({
+            Year: e.target.value
+        });
+    }
+
+    onChangePoster(e) { //envoke method
+        this.setState({
+            Poster: e.target.value
+        });
+    }
+
+    onSubmit(e) {
+        e.preventDefault(); //prevents button from submitting repeatedly
+        alert("Movie: " + this.state.Title + " " + this.state.Year + " " + this.state.Poster); //alerts when button is clicked
+    }
+
+    render() {
+        return (
+            <div className='App'>
+                <form onSubmit={this.onSubmit}>
+                    <div className='form-group'>
+                        <label>Add Movie Title: </label>
+                        <input type='text' className='form-control' value={this.state.Title} onChange={this.onChangeTitle}>
+                        </input>
+                    </div>
+
+                    <div className='form-group'>
+                        <label>Add Movie Year: </label>
+                        <input type='text' className='form-control' value={this.state.Year} onChange={this.onChangeYear}>
+                        </input>
+                    </div>
+
+                    <div className='form-group'>
+                        <label>Movie Poster: </label>
+                        <textarea type='text' className='form-control' value={this.state.Poster} onChange={this.onChangePoster}>
+                        </textarea>
+                    </div>
+
+                    <div className='form-group'>
+                        <input type='Submit' value='Add Movie' className='btn btn-primary'>
+
+                        </input>
+                    </div>
+                </form>
+            </div> //form within div allows user to submit movies
+        );
+    }
 }
