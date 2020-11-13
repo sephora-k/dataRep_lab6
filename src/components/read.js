@@ -9,9 +9,9 @@ export class Read extends React.Component { //'export' keyword allows exportatio
     };
 
     componentDidMount() { //component life cycle hook is called every time a component becomes active
-        axios.get('https://jsonblob.com/api/jsonblob/520c3b5e-0312-11eb-a6af-cbf00d776032') //get method retrieves information
+        axios.get('http://localhost:4000/api/movies') //get method retrieves information for localhost URL
             .then((response) => {
-                this.setState({ movies: response.data.Search })
+                this.setState({ movies: response.data.movies })
             }) //fulfilled state in a promise
 
             .catch((error) => {

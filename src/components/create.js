@@ -1,4 +1,5 @@
 import React from 'react'; //import React from React Library
+import axios from 'axios'; //import Axios from Axios Library
 
 export class Create extends React.Component { //'export' keyword will allow access for this class to other .js files
 
@@ -38,6 +39,19 @@ export class Create extends React.Component { //'export' keyword will allow acce
     onSubmit(e) {
         e.preventDefault(); //prevents button from submitting repeatedly
         alert("Movie: " + this.state.Title + " " + this.state.Year + " " + this.state.Poster); //alerts when button is clicked
+    
+        const newMovie = {  //Objects
+            Title: this.state.Title,
+            Year: this.state.Year,
+            Poster: this.state.Poster
+        }
+        axios.post('http://localhost:4000/api/movies', newMovie) //Post request from current URL & returns promise (asynchronous)
+            .then((res)=>{
+                console.log(res);
+            })
+            .catch((err)=>{
+                console.log(err);
+            });
     }
 
     render() {
